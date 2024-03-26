@@ -2,21 +2,24 @@ from app import app
 from db import db
 from sqlalchemy.sql import text
 from flask import render_template, request, redirect
+import users
 
 @app.route("/")
 def index():
-    result = db.session.execute(text("SELECT content FROM messages"))
-    messages = result.fetchall()
-    return render_template("index.html", count=len(messages), messages=messages) 
+    return render_template("index.html") 
 
-@app.route("/new")
-def new():
-    return render_template("new.html")
+@app.route("/login",methods=["POST", "GET"])
+def login():
+    if (request.method == "GET"):
+        return render_template("login.html")
+    
+    if (request.method == "POST"):
+        username = request.form["username"]
+        password = request.form["password"]
+        users.login(username, password)
+        return redirect("/")
 
-@app.route("/send", methods=["POST"])
-def send():
-    content = request.form["content"]
-    sql = "INSERT INTO messages (content) VALUES (:content)"
-    db.session.execute(text(sql), {"content":content})
-    db.session.commit()
+@app.route("/logout")
+def logout():
+    users.logout()
     return redirect("/")

@@ -3,12 +3,11 @@
 {% block content %}
 <h2>Home Page</h2>
 
-Viestien määrä: {{ count }}
-<hr>
-{% for message in messages %}
-{{ message.content }}
-<hr>
-{% endfor %}
-<a href="/new">Lähetä viesti</a>
+{% if session.username %}
+<p>Hello {{session.username}}</p>
+<a href="/logout">Sign Out</a>
+{% else %}
+<a href="/login">Sign In</a>
+{% endif %}
 
 {% endblock %}
