@@ -5,10 +5,16 @@
 
 <form action="/login" method="POST">
     <p>Username:<br>
-    <input type="text" name="username"></p>
+        <input type="text" name="username"></p>
     <p>Password:<br>
-    <input type="password" name="password"></p>
-    <input type="submit" value="Kirjaudu">
+        <input type="password" name="password"></p>
+    <input type="submit" value="Login">
 </form>
+
+{% if message != "" %}
+<p>Error: {{message}}</p>
+{% endif %}
+
+<p>Don&apos;t have an account: <a href="/register">register</a></p>
 
 {% endblock %}

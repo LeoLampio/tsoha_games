@@ -1,3 +1,7 @@
-DROP TABLE IF EXISTS messages CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
-CREATE TABLE messages (id SERIAL PRIMARY KEY, content TEXT);
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE,
+    password TEXT
+);

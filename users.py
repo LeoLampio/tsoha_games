@@ -1,4 +1,5 @@
 from db import db
+from sqlalchemy.sql import text
 from flask import session
 
 def login(username, password):
@@ -6,3 +7,6 @@ def login(username, password):
 
 def logout():
     del session["username"]
+
+def register(username, password):
+    pass
