@@ -9,6 +9,10 @@ import games
 def index():
     return render_template("index.html", games=games.get_games())
 
+@app.route("/game/<int:id>", methods=["GET"])
+def game(id):
+    return render_template("game.html", game=games.get_game(id))
+
 @app.route("/add",methods=["POST", "GET"])
 def add_game():
     if (request.method == "GET"):

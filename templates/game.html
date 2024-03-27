@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}{{game[0]}}{% endblock %}
+{% block content %}
+<h2>{{game[0]}}</h2>
+<p>Created by {{game[1]}}</p>
+<br>
+{% for genre in game[3] %}
+{{ genre }}&nbsp;&nbsp;&nbsp;
+{% endfor %}
+<br>
+<p>{{ game[2] }}</p>
+
+{% endblock %}

@@ -26,6 +26,14 @@ def get_games():
         games.append((game.id, game.title, game.username))
     return games
 
+def get_game(id):
+    result = db.session.execute(text("SELECT U.username, G.title, G.description FROM users U, games G WHERE G.id =:id"), {"id": id}).fetchone()
+    genre_result = db.session.execute(text("SELECT genre FROM genres WHERE game_id =:game_id"), {"game_id": id}).fetchall()
+    genres = []
+    for genre in genre_result:
+        genres.append(genre[0])
+    return (result.title, result.username, result.description, genres)
+
 def get_genres():
     return [
         "Platformer",

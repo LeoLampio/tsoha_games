@@ -13,7 +13,7 @@
 <hr>
 
 {% for game in games %}
-<a class="game_link", href="/login"><div class="game link"><b>{{game[1]}}</b><br>by {{game[2]}}</div></a><br>
+<a class="game_link", href="/game/{{ game[0] }}"><div class="game link"><b>{{game[1]}}</b><br>by {{game[2]}}</div></a><br>
 {% endfor %}
 
 {% endblock %}
