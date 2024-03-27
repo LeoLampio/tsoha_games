@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}Add{% endblock %}
+{% block content %}
+<h2>Add Game</h2>
+
+<form action="/add" method="POST">
+    <p>Title:<br>
+        <input type="text", name="title"></p>
+    
+    {% for i in range(genres_len) %}
+        <label><input type="checkbox", name="genres", value={{i}} />{{genres[i]}}</label>
+    {% endfor %}
+    
+    <p>Description:<br>
+        <textarea name="description", rows="15", cols="200"></textarea></p>
+    <input type="submit", value="Add to database">
+</form>
+
+{% if message != "" %}
+<p>Error: {{message}}</p>
+{% endif %}
+
+{% endblock %}

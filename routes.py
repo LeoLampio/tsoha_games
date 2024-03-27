@@ -3,10 +3,30 @@ from db import db
 from sqlalchemy.sql import text
 from flask import render_template, request, redirect
 import users
+import games
 
 @app.route("/")
 def index():
-    return render_template("index.html") 
+    return render_template("index.html")
+
+@app.route("/add",methods=["POST", "GET"])
+def add_game():
+    if (request.method == "GET"):
+        return render_template("addGame.html", message="", genres=games.get_genres(), genres_len=len(games.get_genres()))
+    
+    if (request.method == "POST"):
+        title = request.form["title"]
+        description = request.form["description"]
+        genre_ids = request.form.getlist("genres")
+
+        if (len(title) > 50 or len(title) < 1):
+            return render_template("addGame.html", message="Title needs to have 1-50 characters.", genres=games.get_genres(), genres_len=len(games.get_genres()))
+        if (len(description) > 1000):
+            return render_template("addGame.html", message="Description is too long.", genres=games.get_genres(), genres_len=len(games.get_genres()))
+        if (len(genre_ids) < 1):
+            return render_template("addGame.html", message="You need to select atleast one genre.", genres=games.get_genres(), genres_len=len(games.get_genres()))
+
+        return redirect("/")
 
 @app.route("/login",methods=["POST", "GET"])
 def login():

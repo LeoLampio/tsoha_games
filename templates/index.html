@@ -5,6 +5,7 @@
 
 {% if session.user_id %}
 <p>Hello {{session.username}}</p>
+<a href="/add">Add Game</a>
 <a href="/logout">Sign Out</a>
 {% else %}
 <a href="/login">Sign In</a>
