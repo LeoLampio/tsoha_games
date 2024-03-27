@@ -3,7 +3,7 @@
 {% block content %}
 <h2>Home Page</h2>
 
-{% if session.username %}
+{% if session.user_id %}
 <p>Hello {{session.username}}</p>
 <a href="/logout">Sign Out</a>
 {% else %}
