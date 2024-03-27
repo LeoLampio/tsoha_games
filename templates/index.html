@@ -10,5 +10,10 @@
 {% else %}
 <a href="/login">Sign In</a>
 {% endif %}
+<hr>
+
+{% for game in games %}
+<a class="game_link", href="/login"><div class="game"><b>{{game[1]}}</b><br>by {{game[2]}}</div></a><br>
+{% endfor %}
 
 {% endblock %}

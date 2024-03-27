@@ -19,6 +19,13 @@ def add(title, description, genre_ids):
     db.session.commit()
     return True
 
+def get_games():
+    result = db.session.execute(text("SELECT G.id, U.username, G.title FROM users U, games G WHERE G.creator_id = U.id")).fetchall()
+    games = []
+    for game in result:
+        games.append((game.id, game.title, game.username))
+    return games
+
 def get_genres():
     return [
         "Platformer",
