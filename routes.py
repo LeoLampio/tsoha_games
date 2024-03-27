@@ -15,6 +15,8 @@ def add_game():
         return render_template("addGame.html", message="", genres=games.get_genres(), genres_len=len(games.get_genres()))
     
     if (request.method == "POST"):
+        users.check_csrf()
+
         title = request.form["title"]
         description = request.form["description"]
         genre_ids = request.form.getlist("genres")
@@ -25,6 +27,9 @@ def add_game():
             return render_template("addGame.html", message="Description is too long.", genres=games.get_genres(), genres_len=len(games.get_genres()))
         if (len(genre_ids) < 1):
             return render_template("addGame.html", message="You need to select atleast one genre.", genres=games.get_genres(), genres_len=len(games.get_genres()))
+
+        if (not games.add(title, description, genre_ids)):
+            return render_template("addGame.html", message="You need to login to add games.", genres=games.get_genres(), genres_len=len(games.get_genres()))
 
         return redirect("/")
 
